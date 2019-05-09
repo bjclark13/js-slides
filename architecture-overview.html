@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section data-markdown>
+						## Architecture Vision
+						### and Development Practices
+					</section>
+					<section data-markdown>
+						### Goals
+						- Support reliability in Our Daily Bread's web infrastructure
+						- Equip developers with tools and systems to achieve their teams' goals
+						- Train teams to take ownership of their own application architecture
+						- Build automated processes wherever possible to free up more time for development
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## QA and Testing
+						Teams will decide on the exact Quality Assurance process that they will enact with their team.
+
+						These things should be the same across teams:
+						- When we write user stories, they should also have test cases
+						- These test cases should be able to be performed manually or using an automated tool
+						- QA and testing is the responsibility of the team as a whole, especially with the lack of dedicated QA engineers
+					</section>
+
+					<section data-markdown>
+						## QA and Testing	
+						On the systems team, our focus will be empowering teams to be able to easily do tests within their software ecosystem.
+					</section>
+
+
+					<section data-markdown>
+						### Manual vs Automated Testing
+						- It will take a while for us to get used to Test Driven Development
+						- Featues will take longer to accomplish
+						- As we get used to it, we will get faster 
+						- We will save time by have cleaner and more thought through code
+					</section>
+
+					<section data-markdown>
+						### Manual vs Automated Testing
+						### Why Invest in Automated Testing?
+						- Humans are imperfect
+						- Saves stakeholder time, because there is less manual work to be done
+						- Ensures stability of system, because all tests are run when one thing changes
+					</section>
+
+					<section data-markdown>
+						### Manual vs Automated Testing
+						### Why Invest in Automated Testing?
+						(old way vs new way)
+					</section>
+
+					<section data-markdown>
+						### Automated Testing
+						Each team will decide on what tools and practices will best fit with the platforms they are developing on.
+
+						(testing pyramid)
+					</section>
+
+
+				</section>
+
+				<section>
+					<section data-markdown>
+						## Testing Decisions
+					</section>
+
+					<section data-markdown>	
+						### Front end
+						For front end development, we have decided to use Cypress.io, because it is able to be a single framework for end-to-end, integration, and unit tests.
+						Cypress also has a dashboard that show the status of our tests, as well as generating screenshots and videos that show how the test ran.	
+					</section>
+
+					<section data-markdown>	
+						### Lambda Functions
+
+						For our Node.js Lambda functions, we will be using Mocha to do testing locally. This makes sense because Cypress uses Mocha internally.  
+					</section>
+
+					<section data-markdown>	
+						### Magento
+						For PHP testing, our Magento team will rely on Magento's native framework for testing, which utilizes PHPUnit.
+
+						The Code Bread team has purchased a course on testing in Magento and will continue to develop this process.
+
+						We would also like to rely on Cypress for testing the front end-facing parts of our Magento sites.
+					</section>
+
+					<section data-markdown>	
+						### WordPress
+
+						We are still in the process of determining how to best do testing with WordPress.
+
+						It will likely be a combination of PHPUnit and Cypress.
+
+						We are also going to implement a CodeSniffer into our build process, so our code is statically analyzed before it deploys. This should catch a lot of syntax errors.
+					</section>
+
+					<section data-markdown>	
+						### Main takeaways
+						The main takeaways from testing and QA is:  
+						- we are going to rely more on automated processes
+						- we will consider QA a team effort and part of the development process
+						- we commit to use Cypress where we can, to give a great experience for developers and testers
+					</section>
+				</section>
+
+				<section>
+						<section data-markdown>
+							## Microservices
+							### More than just a buzz word
+						</section>
+
+						<section data-markdown>	
+							### Definition of Micro Service
+							A loosely couple service that has its own data model and can interact with other services via an API.
+						</section>
+
+						<section data-markdown>	
+							A primary goal of our systems team will be to build a path for replacing our WordPress sites with a micro service architecture.
+
+							This will allow us to:
+								- have improved performance by designing our APIs around *our* data
+								- develop more rapidly, because we don't have to worry about what our changes will do to other parts of the application
+								- reduce costs significantly by utilizing Amazon's pay-per-use pricing model.
+						</section>
+
+						<section data-markdown>	
+							The ODBx project has gotten us started down the road of using microservices. The drag-and-drop content on the home page is all served using a micro service API.
+
+							For this project, we were learning as we went.
+
+							Our goal on the systems team is to build those services into a version control repository, and apply DevOps practices to development of these services.
+						</section>
+
+						<section data-markdown>	
+							### DevOps with Microservices
+							We have a single project (tentativley named "crouton"), that stores all the code of our different microservices.
+							
+							We've worked with David Tucker to build a CI/CD system, where pushing to this repository will automatically deploy these changes to our APIs.
+
+							We're relying on the Serverless Framework to build the infrastructure for our services, using templates.
+						</section>
+
+						<section data-markdown>	
+							### Microservices Goals
+							- Update our ODBx services to use the Serverless framework within the Crouton project
+							- Improve our DevOps practices with automated test, better deployment, and A/B Testing
+							- Teach our teams how to use the Serverless framework to build microservices for their future development
+
+							The main takeaway is that any new API development should be built using our Serverless tools.
+						</section>	
+				</section>
+
+				<section>
+					<section data-markdown>
+						### What have we been doing lately
+
+						Here are some things that we're doing architecturally to improve our systems:
+
+						- Switch our WordPress instance type to the t3 family to use CPU bursting when we hit peak traffic 
+						- Switched all WordPress sits into our PCI Compliant environment, for better security
+						- Are working on optimizing images in S3 buckets for faster load times, lower costs
+						- Using Elastic File System to store our configuration files across servers
+						- Added Status Cake to all of our sites to notify us via Slack and email in case of downtime
+						- Hired a new developer to work with our infrastructure!
+
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+
+			Reveal.configure({ backgroundTransition: 'zoom' })
+
+		</script>
+	</body>
+</html>
