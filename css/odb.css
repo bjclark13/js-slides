@@ -27,7 +27,8 @@ header img {
 
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
     font-weight: bold;
-    color: #1e375f
+    color: #1e375f;
+    font-family: 'PT-Sans', sans-serif;
 }
 .reveal h1, .reveal h2 {
     font-family: 'PT Serif', serif;
