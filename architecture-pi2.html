@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="shortcut icon" ref="https://odb.org/favicon.ico?v=1.1"  type="image/x-icon"/>
+
+		<title>Our Daily Bread</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/odb.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<header>
+			<img src="https://odb.org/wp-content/themes/odbm-base-ourdailybread/images/odb_logo.svg"/>
+		</header>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section data-markdown>
+						## Architecture Vision
+						### and Development Practices
+					</section>
+					<section data-markdown>
+						### Systems Team Goals
+						- Support reliability in Our Daily Bread's software infrastructure
+						- Equip developers with tools and systems to achieve their teams' goals
+						- Train teams to take ownership of their own application architecture
+						- Build automated processes wherever possible to free up more time for development
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## QA and Testing
+					</section>
+					<section data-markdown>
+                        ### QA and Testing
+
+                        Over the last PI, we decided to use Cypress for front end testing, and use PHPUnit for Unit testing in our PHP applicaitons.
+
+                        We set up automated process to ensure that tests pass before a build runs.
+					</section>
+
+					<section data-markdown>
+                        ### QA and Testing
+
+                        Going forward, we will to grow our testing chops.
+
+                        Instead of the goal of writing 1 unit tests, this increment, I'd like us to write tests whenever the ticket calls for it.
+                    </section>
+
+                    <section data-markdown>
+                        ### QA and Testing
+
+                        Any work being done should have an answer to this question "*Do I need to write tests for this?*". This takes practice, and thought into whether the cost of writing tests is justified by increased reliablility.
+
+                        If we are writing tests, we should write the tests *first*, then write the code to make the tests pass.
+					</section>
+                </section>
+
+				<section>
+					<section data-markdown>
+						## Non Functional Requirements
+					</section>
+
+					<section data-markdown>
+						### What are NFRs
+
+						These are requirements that every system we build should adhere to, even though the end-user doesn't necessarily see the results.
+
+						They are to ensure quality, stability, security, and reliability.
+					</section>
+
+
+					<section data-markdown>
+						#### Here are some basic NFRs starting this Program Increment
+
+						- Front end initial response time should be less than 3 seconds
+						- API/Servers should be able to automatically and manually scale to match load
+						- Logs should be rotated regularly on servers, or set to expire in CloudWatch
+
+					</section>
+
+                    <section data-markdown>
+                        *(continued)*
+                        - If running server is terminated/fails, site should be able to recover on its own
+                        - Lambda functions should use version control and Serverless Framework, CloudFormation, or similar tool
+                        - Configurations & changes should always be baked into a deployment, i.e. if a new server spins up, it should have the same configuration
+                    </section>
+
+					<section data-markdown>
+                            * Additions *
+                            - *Each ticket should evaluated if automated tests should be written.*
+                            - *Automated tests should be run locally and pass before being merged.*
+					</section>
+
+                </section>
+
+                <section data-markdown>
+                    ### Microservices Recap
+                    - Since last PI Planning, we have build many new microservices, including:
+                        - Journals
+                        - Comments
+                        - Bookmarks
+                        - ODBx Widgets
+                        - Translation Engine
+                </section>
+
+                <section>
+					<section data-markdown>
+                        ### Eliminating Toil
+
+                        - Toil is a term coined by (Google's reliability team)[https://landing.google.com/sre/sre-book/chapters/eliminating-toil/]
+                        - Toil is essentially work that is manual and should be automated.
+                        - Not administrative work, like team meetings
+                        - https://landing.google.com/sre/sre-book/chapters/eliminating-toil/
+                    </section>
+
+                    <section data-markdown>
+                        ### Some Examples of Toil at ODB
+                        - Manually compiling translations
+                        - Manually generated emails
+                        - Scaling servers by hand
+                    </section>
+
+                    <section data-markdown>
+                        ### When Should I Fix Toil
+                        - If you are building a feature that touches something that includes toil, it is your responsibility to address it.
+                        - Either make the change immediately, or create a new enabler ticket to address the problem.
+
+                    </section>
+
+                    <section data-markdown>
+                        ### Tools for Reducing Toil
+                        - For repetitive work, consider using Cloudwatch events to trigger scripts on a cycle
+                            - Similar solution to using crontab on a server.
+                        - Bash scripts are incredibly helpful to write small, automated tasks.
+                        - Utilize Gulp, a JavaScript tool for automated tasks
+                            - Can use `watch`ing to run tasks whenever you make a change to a file
+                            - Get add Gulp or similar to build process, to run before you deploy need code.
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+
+			Reveal.configure({ backgroundTransition: 'zoom' })
+			Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+
+		</script>
+	</body>
+</html>
