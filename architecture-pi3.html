@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="shortcut icon" ref="https://odb.org/favicon.ico?v=1.1"  type="image/x-icon"/>
+
+		<title>Our Daily Bread</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/odb.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<header>
+			<img src="https://odb.org/wp-content/themes/odbm-base-ourdailybread/images/odb_logo.svg"/>
+		</header>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section data-markdown>
+						## Architecture Vision
+						### and Development Practices
+						#### (take 3)
+					</section>
+					<section data-markdown>
+						### Bakers Team Goals
+						- Support reliability in Our Daily Bread's software infrastructure
+						- Equip developers with tools and systems to achieve their teams' goals
+						- Train teams to take ownership of their own application architecture
+						- Build automated processes wherever possible to free up more time for development
+					</section>
+				</section>
+				<section>
+					<section data-markdown>
+						## QA and Testing
+					</section>
+					<section data-markdown>
+						### QA and Testing
+
+						Last PI, we had a focus on writing automated tests for features we are working on.
+					</section>
+
+					<section data-markdown>
+						### QA and Testing
+
+						Two main categories of tests include:
+						1. Tests that run during the build on Pull Requests
+							- Here we launch a local version of the application and run tests against that.
+						2. Tests that run against code already in production
+							- Good for making sure tests are still passing, even when code doesn't change.
+							- Can be used for regression testing.
+					</section>
+
+					<section data-markdown>
+						### QA and Testing
+
+						For the second example, we have a repo that holds all end-to-end tests and compiles them into a single report.
+
+						- https://github.com/rbcministries/cypress-e2e
+						- http://odbtests.s3-website-us-east-1.amazonaws.com/reports.html
+
+					</section>
+
+					<section data-markdown>
+						### QA and Testing
+
+						This can be used for devs and non-devs alike to verify whether tests our sites and services are stable and behaving as expected.
+
+						For example, design can go to this page and verify whether our site is meeting basic accessibility standards.
+					</section>
+
+					<section data-markdown>
+						### Testing for Accessibility on the Web
+						Accessibility is incredibly important to ODB (it's in our mission)
+
+						There are a lot of great tools for testing our code for accessibility:
+										</section>
+
+
+					<section data-markdown>
+						### Testing for Accessibility on the Web
+
+						1. Cypress (https://www.npmjs.com/package/cypress-axe#output--Cypress) can evaluate any DOM element or page for accessibility. Example: https://github.com/rbcministries/cypress-e2e/blob/master/odb-experience/tests/integration/accessibility.spec.js
+						2. Lighthouse (open Chrome Dev Tools)
+						3. ESLint (https://www.npmjs.com/package/eslint-plugin-jsx-a11y)
+
+					</section>
+
+					<section data-markdown>
+						### Testing for Accessibility on the Web
+
+						None of these tools are perfect, but can help us catch low-hanging fruit.
+					</section>
+                </section>
+
+				<section>
+					<section data-markdown>
+						## Non Functional Requirements
+					</section>
+
+					<section data-markdown>
+						### What are NFRs
+
+						These are requirements that every system we build should adhere to, even though the end-user doesn't necessarily see the results.
+
+						They are to ensure quality, stability, security, and reliability.
+					</section>
+
+
+					<section data-markdown>
+						#### Here are some basic NFRs starting this Program Increment
+
+						- Front end initial response time should be less than 3 seconds
+						- API/Servers should be able to automatically and manually scale to match load
+						- Logs should be rotated regularly on servers, or set to expire in CloudWatch
+					</section>
+
+                    <section data-markdown>
+						*(continued)*
+
+						- If running server is terminated/fails, site should be able to recover on its own
+						- Lambda functions should use version control and Serverless Framework, CloudFormation, or similar tool
+						- Configurations & changes should always be baked into a deployment, i.e. if a new server spins up, it should have the same configuration
+
+					</section>
+
+					<section data-markdown>
+						*(continued continued)*
+
+						- Each ticket should evaluated if automated tests should be written.
+						- Automated tests should be run locally and pass before being merged.
+					</section>
+
+					<section data-markdown>
+						### Additions
+
+						- *If an item that does falls under LOAF does not use the LOAF stylesheet or component, then a ticket should be created to migrate it.*
+						- *Any hard-coded text should be localized, i.e., wrapped in a translation function or component*
+					</section>
+
+					<section data-markdown>
+						These additions are valubable, because they:
+						- Ensure that adding support to new languages is seamless
+						- Help us gauge what work needs to be done to reduce technical debt by refactoring to LOAF.
+					</section>
+
+					<section data-markdown>
+						We are adding these in the form of checkboxes to our pull requests to ensure that in code review, we are testing agains NFRs
+
+						Example: https://github.com/rbcministries/ODB-Experience
+					</section>
+
+					<section data-markdown>
+						The goals is not necessarily to enforce testing on every PR, but to hold each other accountable to writing tests, and have a conversation about the best way to write tests.
+					</section>
+                </section>
+
+                <section>
+					<section data-markdown>
+                        ### Review: Eliminating Toil
+
+                        - Toil is a term coined by Google's reliability team
+                        - Toil is essentially work that is manual and should be automated.
+                        - Not administrative work, like team meetings
+                        - https://landing.google.com/sre/sre-book/chapters/eliminating-toil/
+					</section>
+
+					<section data-markdown>
+						### Review: Eliminating Toil
+
+						- What's an example of where we elimated toil in this last PI?
+						- What's an example of an opportunity to eliminate toil going forward?
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+						### Architectural Goals Summary
+
+						- Ensure NFRs are visible and being evaluated on every ticket
+						- Help continue to make testing and automation easier for each team
+
+						#### If there are any specific ways that we can help achieve these, please send us a message, or create a ticket in our backlog.
+                    </section>
+                </section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+
+			Reveal.configure({ backgroundTransition: 'zoom' })
+			Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+
+		</script>
+	</body>
+</html>
