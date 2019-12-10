@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="shortcut icon" ref="https://odb.org/favicon.ico?v=1.1"  type="image/x-icon"/>
+
+		<title>Our Daily Bread</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/odb.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<header>
+			<img src="https://odb.org/wp-content/themes/odbm-base-ourdailybread/images/odb_logo.svg"/>
+		</header>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<section data-markdown>
+						## Architecture Vision
+						### and Development Practices
+						#### (take 4)
+					</section>
+					<section data-markdown>
+						### Bakers Team Goals
+						- Support reliability in Our Daily Bread's software infrastructure
+						- Equip developers with tools and systems to achieve their teams' goals
+						- Train teams to take ownership of their own application architecture
+						- Build automated processes wherever possible to free up more time for development
+					</section>
+				</section>
+
+				<section>
+					<section data-markdown>
+						## Non Functional Requirements (NFRs)
+                    </section>
+
+
+					<section data-markdown>
+                        ### NFRs
+
+                        We have updated the NFRs to be more generic, i.e., not specific to a certain platform.
+
+                        This will help us keep the NFRs the same no matter where our technology goes.
+
+                        NFRs are in [Confluence](https://ourdailybread.atlassian.net/wiki/spaces/OPHP/pages/71893012/Non-Functional+Requirements)
+                    </section>
+
+                    <section data-markdown>
+                        ### NFRs in Practice
+
+                        NFRs are not necessarily acceptance criteria, because they are used to describe non-functional attributes of all our systems.
+
+                        However, if it is useful to ensure we are accomplishing NFRs, any NFR may be added to either acceptance criteria of a user story, or as part of the team's Definition of Done.
+                    </section>
+                </section>
+
+                <section>
+					<section data-markdown>
+                        ### Back To Testing
+
+                        - We have done a great job of starting to implement automated testing in our processes
+                        - Now we are going to start tracking metrics on testing.
+                        - The Bakers team will be evaluating code coverage tools for each of our platforms.
+					</section>
+                </section>
+
+                <section>
+					<section data-markdown>
+                        ### Security
+
+                        - Security is important for any organization
+                        - We need to ensure that we are protecting the ministry, as well as customer data
+                        - While we do our best to implement best security practices, we can always do better
+                        - One of the Bakers team objectives will be to get training in security, and implement any need changes.
+					</section>
+                </section>
+
+                <section>
+                    <section data-markdown>
+                        ### Architectural Goals Summary
+
+                        - NFRs will be less platform-specific
+                        - We will begin tracking code coverage on our applications
+                        - We will training on and implementing best security standards
+
+                        *If there are any specific ways that we can help achieve these, please send us a message, or create a ticket in our backlog.*
+                    </section>
+                </section>
+
+                <section data-background="https://media.giphy.com/media/xfs2eBhQ6ujgA/giphy.gif">
+                    <h2 style="color: #fff; margin-top: 45vh;"> Thank You! </h2>
+                </section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+
+			Reveal.configure({ backgroundTransition: 'zoom' })
+			Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+
+		</script>
+	</body>
+</html>
