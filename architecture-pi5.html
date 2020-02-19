@@ -1,196 +1,246 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="shortcut icon" ref="https://odb.org/favicon.ico?v=1.1"  type="image/x-icon"/>
 
-		<title>Our Daily Bread</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="shortcut icon" ref="https://odb.org/favicon.ico?v=1.1" type="image/x-icon" />
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/simple.css">
-		<link rel="stylesheet" href="css/odb.css">
+	<title>Our Daily Bread</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/simple.css">
+	<link rel="stylesheet" href="css/odb.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<header>
-			<img src="https://odb.org/wp-content/themes/odbm-base-ourdailybread/images/odb_logo.svg"/>
-		</header>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<section data-markdown>
-						## Architecture Vision
-						### and Development Practices
-						#### (take 5)
-					</section>
-					<section data-markdown>
-						### Bakers Team Goals
-						- Support reliability in Our Daily Bread's software infrastructure
-						- Equip developers with tools and systems to achieve their teams' goals
-						- Train teams to take ownership of their own application architecture
-						- Build automated processes wherever possible to free up more time for development
-					</section>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<style>
+		.reveal h2 {
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<img src="https://odb.org/wp-content/themes/odbm-base-ourdailybread/images/odb_logo.svg" />
+	</header>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section data-background="https://media.giphy.com/media/2Pn1YMTtDh2ko/source.gif"
+					data-background-opacity=".8" data-background-color="black">
+					<h2 style="color: #fff">Architecture Vision</h2>
+					<h3 style="color: #fff">and Development Practices</h3>
+				</section>
+				<section data-markdown>
+					### Bakers Team Goals
+					- Support reliability in Our Daily Bread's software infrastructure
+					- Equip developers with tools and systems to achieve their teams' goals
+					- Train teams to take ownership of their own application architecture
+					- Build automated processes wherever possible to free up more time for development
+				</section>
+			</section>
+
+			<section>
+				<section data-markdown data-background="https://media.giphy.com/media/f9SgNsok0zsxI3vS56/giphy.gif"
+					data-background-size="cover">
+					## Testing
+				</section>
+				<section data-markdown>
+					### Testing
+
+					- We have done a great job of starting to implement automated testing in our processes
+					- We have reported 40% code coverage already!
+					- We know that we have had frustrations will failing tests
 				</section>
 
-				<section>
-					<section data-markdown>
-						## Non Functional Requirements (NFRs)
-                    </section>
+				<section data-markdown>
+					### Why Do Tests Fail?
+
+					<img src="https://media.giphy.com/media/lD76yTC5zxZPG/200w_d.gif" />
+
+					Tests fail from two main reasons:
+
+					1. Our code does not work well
+					2. The test does not work well
+				</section>
+
+				<section data-markdown>
+					### When code does not work well
+
+					When our code does not work well, we simply need to fix it.
+
+					This is the purpose of testing. We should not be releasing features when the tests tell us our code
+					is not working
+				</section>
+
+				<section data-markdown>
+					### When the test does not work well
+
+					Tests are code too, so this means that sometimes we write poor tests. When this happens we can
+					either:
+					1. Fix the tests right away
+					2. Skip the test (by adding .skip around your spec) and create a bug ticket for *fixing the test
+					functionality*
 
 
-					<section data-markdown>
-                        ### NFRs
+				</section>
 
-                        We have updated the NFRs to be more generic, i.e., not specific to a certain platform.
+				<section data-markdown>
+					### When the test does not work well
 
-                        This will help us keep the NFRs the same no matter where our technology goes.
+					Option number two allows you to not disrupt your development (people > process), but also not ignore
+					the problem.
 
-                        NFRs are in [Confluence](https://ourdailybread.atlassian.net/wiki/spaces/OPHP/pages/71893012/Non-Functional+Requirements)
-                    </section>
+				</section>
 
-                    <section data-markdown>
-                        ### NFRs in Practice
+				<section data-markdown>
+					### When the test does not work well
 
-                        NFRs are not necessarily acceptance criteria, because they are used to describe non-functional attributes of all our systems.
+					If the test that is failing is for the feature you are currently working on, you should always do
+					option number one.
 
-                        However, if it is useful to ensure we are accomplishing NFRs, any NFR may be added to either acceptance criteria of a user story, or as part of the team's Definition of Done.
-                    </section>
-                </section>
 
-                <section>
-					<section data-markdown>
-                        ### Back To Testing
+				</section>
 
-                        - We have done a great job of starting to implement automated testing in our processes
-			- We have reported 40% code coverage already!
-			- We know that we have had frustrations will failing tests
-                    </section>
+				<section data-background="https://media.giphy.com/media/iOGROlDst8AKOfs2ix/source.gif"
+					style="background-size: cover;">
+					<h3 style="color: #fff">Ignoring failing tests is not an option anymore</h3>
+				</section>
 
-		<section data-markdown>
-                        ### Why Do Tests Fail
-			
-			Tests fail from two main reasons:
-			1. Our code does not work well
-			2. The test does not work well
-					</section>
-			
-			                  <section data-markdown>
-                        ### When code does not work well
-			
-			When our code does not work well, we simply need to fix it. 
-						  
-			This is the purpose of testing. We should not be releasing features when the tests tell us our code is not working
-					</section>
-			
-			<section data-markdown>
-				### When the test does not work well
 
-				Tests are code too, so this means that sometimes we write poor tests. When this happens we can either 
-				1. Fix the tests right away
-				2. Skip the test (by adding .skip around your spec) and create a bug ticket for *fixing the test functionality*
-				
-				Option number two allows you to not disrupt your development (people > process), but also not ignore the problem.
-				
-				If the test that is failing is for the feature you are currently working on, you should always do option number one.
-			
-				*Ignoring failing tests is not an option*
+				<section data-markdown>
+					### Common Cypress Mistakes
+					- Using async/await
+					- Using the UI to log in
+					- Relying on test data that is bound to change
+				</section>
+
+				<section data-markdown>
+					### Common Cypress Fixes
+					- Using async/await *Don't*
+					- Using the UI to log in *Use cy.login instead*
+					- Relying on test data that is bound to change *Use mocking and stubbing, shallow render, and/or
+					right unit tests instead.*
+
+					See https://docs.cypress.io/guides/references/best-practices.html
+				</section>
 			</section>
-			
-			<section data-markdown>
-				### Common Cypress Mistakes
-				- Using async/await
-				- Using the UI to log in
-				- Relying on test data that is bound to change
-			</section>
-			
-			<section data-markdown>
-				### Common Cypress Fixes
-				- Using async/await *Don't*
-				- Using the UI to log in  *Use cy.login instead*
-				- Relying on test data that is bound to change *Use mocking and stubbing, shallow render, and/or right unit tests instead.*
-				
-				See https://docs.cypress.io/guides/references/best-practices.html
-			</section>
-                </section>
 
-                <section>
-					<section data-markdown>
-                        ### Security
-						
-                        - Thank you for not killing us after we started implementing MFA
-			- Security is very important to protect our users and our organization
-			- The Bakers team will focus on analyzing and remediating security issues in our systems
-			- The following NFR has been added: "Admin API requests need to use an authorizer to prevent access to end users (not just hiding the admin screen)"
+			<section>
+				<section data-markdown data-background="https://media.giphy.com/media/mHhHc7Q4wYWoE/source.gif"
+					data-background-size="cover">
+					## Security
+				</section>
+				<section data-markdown>
+					### Security
+
+					- Thank you for not killing us after we started implementing MFA
+					- Security is very important to protect our users and our organization
+					- The Bakers team will focus on analyzing and remediating security issues in our systems
+					- The following NFR has been added:
+					*Admin API requests need to use an authorizer to prevent access
+					to end users (not just hiding the admin screen)*
+				</section>
 			</section>
-                </section>
 
-		 <section>
-                    	<section data-markdown>
-                        ### The Future of Our Architecture
-			
-			We have a few goals for our architecture that we believe will help us achieve the organizational mission and vision.
-				
-			These include:
-				- Migration Away From WordPress In Favor of Crouton
-				- Collecting and Analyzing Big Data (we need to start collecting more data)
-				- Utilizing ElasticSearch technology for admins and users
-				
-			https://ourdailybread.atlassian.net/wiki/spaces/ST/pages/170525515/Architectural+Goals
-			 </section>
-			 
-			<section data-markdown>
-                        ### How Will We Achieve This
-				
-				- Migration Away From WordPress In Favor of Crouton
-				Don't create anything new in WordPress for daily devos. 
-				
-				- Collecting and Analyzing Big Data
-				Start collecting data and feedback (without violating user privacy)
-				
-				- Utilizing ElasticSearch technology for admins and users
-				Bakers will have objective for implementing elastic search for post by scripture reference (as prototype)
-				
-				We will be working to help align both business and architectural goals in future features.
-			 </section>
-		</section>
+			<section>
+				<section data-markdown data-background="https://media.giphy.com/media/jy8KccEG6ykvu/giphy.gif"
+					data-background-opacity=".6" data-background-color="black">
+					## The Future of Our Architecture
+				</section>
+				<section data-markdown>
+					### The Future of Our Architecture
 
-                <section data-background="https://giphy.com/embed/Mp4hQy51LjY6A">
-                    <h2 style="color: #fff; margin-top: 45vh;"> Thank You! </h2>
-                </section>
-			</div>
+					We have a few goals for our architecture that we believe will help us achieve the organizational
+					mission and vision.
+
+					These include:
+					- Migration Away From WordPress In Favor of Crouton
+					- Collecting and Analyzing Big Data (we need to start collecting more data)
+					- Utilizing ElasticSearch technology for admins and users
+
+				</section>
+
+				<section data-markdown>
+					### How Will We Achieve This?
+
+					- Migration Away From WordPress In Favor of Crouton
+					*Don't create anything new in WordPress for daily devos.*
+
+					- Collecting and Analyzing Big Data
+					*Start collecting data and feedback (without violating user privacy)*
+
+					- Utilizing ElasticSearch technology for admins and users
+					*Bakers will have objective for implementing elastic search for post by scripture reference (as
+					prototype)*
+
+				</section>
+
+				<section data-markdown>
+					### How Will We Achieve This?
+
+					- Migration Away From WordPress In Favor of Crouton
+
+					*Don't create anything new in WordPress for daily devos sites. Develop microservices and React
+					components instead*
+
+				</section>
+
+				<section data-markdown>
+					### How Will We Achieve This?
+
+					- Collecting and Analyzing Big Data
+
+					*Start collecting data and feedback (without violating user privacy)*
+
+				</section>
+
+				<section data-markdown>
+					### How Will We Achieve This?
+
+					We will be working to help align both business and architectural goals in future features.
+				</section>
+			</section>
+
+			<section data-background="https://media.giphy.com/media/6HOkD1pSCne4E/giphy.gif"
+				data-background-repeat="repeat" data-background-size="350px">
+				<h2 style="color: #fff;"> Thank You! </h2>
+			</section>
 		</div>
+	</div>
 
-		<script src="js/reveal.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true }
+			]
+		});
 
-			Reveal.configure({ backgroundTransition: 'zoom' })
-			Reveal.configure({ pdfMaxPagesPerSlide: 1 })
+		Reveal.configure({ backgroundTransition: 'zoom' })
+		Reveal.configure({ pdfMaxPagesPerSlide: 1 })
 
-		</script>
-	</body>
+	</script>
+</body>
+
 </html>
